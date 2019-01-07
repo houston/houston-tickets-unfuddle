@@ -1,0 +1,18 @@
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag    "houston/tickets/unfuddle/application", :media => "all" %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "houston/credentials/application" %>
+  <%= javascript_include_tag "houston/tickets/unfuddle/application" %>
+<% end %>
+
+<% content_for :project_banner do %>
+  <% if @project %>
+    <%= render partial: "houston/tickets/unfuddle/ticket_tracker_refresh", locals: {project: @project} if @project.ticket_tracker.supports_any?(:syncing_tickets, :syncing_milestones) %>
+    <%= render partial: "houston/tickets/unfuddle/new_ticket", locals: {project: @project} %>
+  <% end %>
+<% end %>
+
+<%# Houston's default layout %>
+<%= render template: "layouts/application" %>
